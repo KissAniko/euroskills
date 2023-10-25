@@ -1,0 +1,33 @@
+1.   SQL kapcsolati szöveg példa:
+     private readonly string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=kekhegy;";
+
+2.   Kapcsolat objektuma:
+     private MySqlConnection connection;
+
+3.   1 adatsor kiolvasásához létre kell hozni egy osztályt, amelyben az adatmezők a lekérdezés mezői lesznek. (get;set; kell!)
+
+4.   Lista létrehozása például: private List<Auto> dataList;
+
+5.   Lekérdezés szövegének megírása
+     string queryText = "SELECT ...";
+
+6.   Lekérdezés utasításának objektuma:
+     MySqlCommand command = new MySqlCommand(queryText, connection);
+
+7.   Olvasó létrehozása az eredményhez:
+     MySqlDataReader reader= command.ExecuteReader();
+
+8.   Olvasó végigolvasása példa:
+     while (reader.Read())
+     {
+	     dataList.Add(new Auto(reader));
+     }
+
+9    Olvasó lezárása:
+     reader.Close();
+
+10.  DataGrid-hez hozzákötés: (a result a DataGrid neve)
+     result.ItemsSource = dataList;
+
+Kapcsolat lezárása:
+connection.Close();
